@@ -1,0 +1,61 @@
+# Agent 2 (Researcher) Output: Technical Brief for Sentinel 360 Redesign
+
+## 1. Core Technologies
+- **Framework:** Next.js 15
+- **Language:** TypeScript
+- **UI Components:** shadcn/ui (pre-installed)
+- **Styling:** Tailwind CSS
+- **Icons:** lucide-react (pre-installed)
+
+## 2. Component Inventory (from `/components/ui`)
+The following `shadcn/ui` components are available and should be used to build the new landing page:
+- **`Button`**: For all interactive elements like CTAs and links. Utilize `variant` (`default`, `secondary`, `ghost`, `outline`) and `size` (`default`, `lg`) props.
+- **`Card`**: The primary container for feature blocks and testimonials. Use sub-components: `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`.
+- **`Avatar`**: For testimonial author images. Use sub-components: `AvatarImage`, `AvatarFallback`.
+- **`Badge`**: To highlight key features or add tags (e.g., "New", "Popular").
+- **`Separator`**: To create visual divisions between sections.
+
+## 3. Iconography (`lucide-react`)
+The following icons are recommended for the redesign. All are available from the `lucide-react` library.
+- **Navigation/General:** `Shield`, `Menu`, `X`, `ArrowRight`, `ChevronRight`.
+- **Hero Section:** `Sparkles`, `Zap`.
+- **Features Section:**
+  - Security: `ShieldCheck`, `LockKeyhole`.
+  - Groups: `UsersRound`, `Group`.
+  - Payments: `Wallet`, `CreditCard`.
+- **Testimonials Section:** `Star`, `Quote`.
+- **Social Proof Logos:** While not icons, the logos for Netflix, Spotify, etc., will need to be sourced (as simple SVG components or images) and placed in the `/public` directory. For this task, we will use text placeholders.
+
+## 4. Tailwind CSS Classes & Techniques
+The following Tailwind CSS utilities will be crucial for implementing the new design.
+
+### 4.1. Layout
+- **Grids:** Use responsive grids for the features and testimonials sections.
+  - Example: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8`
+- **Flexbox:** For alignment within components and for the navigation bar.
+  - Example: `flex items-center justify-between`
+- **Containers & Spacing:** Use a main container with `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8` for consistent width. Use `py-16 sm:py-20` for vertical spacing between sections.
+
+### 4.2. Typography
+- **Headlines:** Use large, bold fonts for section titles.
+  - Example: `text-3xl font-bold tracking-tight sm:text-4xl`
+- **Gradient Text:** For the main hero headline to make it stand out.
+  - Example: `bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent`
+- **Body Text:** Use `text-muted-foreground` for descriptive paragraphs to create contrast with headlines.
+
+### 4.3. Styling & Effects
+- **Backgrounds:**
+  - Use subtle gradients for the page background: `bg-gradient-to-b from-white to-gray-50`.
+  - Use stronger gradients or dark backgrounds for the CTA section: `bg-gray-900 text-white`.
+- **Shadows:** Apply shadows to cards to create a sense of elevation.
+  - Example: `shadow-md hover:shadow-lg transition-shadow`
+- **Borders & Rings:** Use subtle rings on interactive elements on hover/focus.
+  - Example: `hover:ring-2 hover:ring-primary`
+- **Animations & Transitions:** Add smooth transitions to hover effects.
+  - Example: `transition-all duration-300 ease-in-out`
+  - Hover transform: `hover:scale-105`
+
+## 5. Implementation Target
+- **Primary File:** The entire redesign will be implemented within `app/page.tsx`.
+- **Static Assets:** Any new images or logos (like subscription service logos) should be placed in the `public/` directory. For now, we will use text placeholders or simple shapes.
+- **Dependencies:** No new dependencies are required. The existing `package.json` is sufficient.
