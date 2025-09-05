@@ -43,7 +43,16 @@ export async function POST(request: NextRequest) {
     users.push(newUser)
 
     // Generate verification token
-    const verificationToken = jwt.sign({ userId: newUser.id, email }, process.env.JWT_SECRET || "fallback-secret", {
+    const jwtSecret = process.env.JWT_SECRET
+    if (!jwtSecret) {
+      console.error("FATAL ERROR: JWT_SECRET is not defined in the environment variables.")
+      return NextResponse.json(
+        { message: "Server configuration error. Please contact the administrator." },
+        { status: 500 },
+      )
+    }
+
+    const verificationToken = jwt.sign({ userId: newUser.id, email }, jwtSecret, {
       expiresIn: "24h",
     })
 
