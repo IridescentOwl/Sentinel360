@@ -1,9 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
-
-// Mock database - in production, use PostgreSQL
-const users: any[] = []
+import { users } from "@/lib/db"
 
 export async function POST(request: NextRequest) {
   try {

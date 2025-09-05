@@ -1,8 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import jwt from "jsonwebtoken"
-
-// Mock database - in production, use PostgreSQL
-const users: any[] = []
+import { users } from "@/lib/db"
 
 export async function GET(request: NextRequest) {
   try {

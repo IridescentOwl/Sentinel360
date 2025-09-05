@@ -2,8 +2,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
-// Mock database - in production, use PostgreSQL
-const users: any[] = []
+import { users } from "@/lib/db"
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,13 +31,22 @@ export async function POST(request: NextRequest) {
     }
 
     // Generate JWT token
+    const jwtSecret = process.env.JWT_SECRET
+    if (!jwtSecret) {
+      console.error("FATAL ERROR: JWT_SECRET is not defined in the environment variables.")
+      return NextResponse.json(
+        { message: "Server configuration error. Please contact the administrator." },
+        { status: 500 },
+      )
+    }
+
     const token = jwt.sign(
       {
         userId: user.id,
         email: user.email,
         name: user.name,
       },
-      process.env.JWT_SECRET || "fallback-secret",
+      jwtSecret,
       { expiresIn: "7d" },
     )
 
