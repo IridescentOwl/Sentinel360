@@ -14,7 +14,16 @@ export async function GET(request: NextRequest) {
     }
 
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "fallback-secret") as any
+    const jwtSecret = process.env.JWT_SECRET
+    if (!jwtSecret) {
+      console.error("FATAL ERROR: JWT_SECRET is not defined in the environment variables.")
+      return NextResponse.json(
+        { message: "Server configuration error. Please contact the administrator." },
+        { status: 500 },
+      )
+    }
+
+    const decoded = jwt.verify(token, jwtSecret) as any
 
     // Find user and mark as verified
     const user = users.find((u) => u.id === decoded.userId)
