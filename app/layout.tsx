@@ -22,7 +22,6 @@ export const metadata: Metadata = {
   title: "Sentinel 360 - Subscription Sharing for Thapar Students",
   description:
     "Share subscriptions and save money with trusted Thapar University students. Secure, simple, and smart subscription management.",
-  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -33,10 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable} antialiased`}>
       <head>
-        {/* Added Razorpay checkout script */}
         <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="beforeInteractive" />
       </head>
-      <body className="font-sans">
+      <body className="font-sans bg-[#0D0F1E] text-white">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

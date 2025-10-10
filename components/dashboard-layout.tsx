@@ -1,11 +1,11 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { useAuth } from "@/lib/auth"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Input } from "@/components/ui/input"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,18 +16,16 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
-  Shield,
   Home,
-  CreditCard,
+  Package,
   Users,
   Settings,
-  Activity,
-  Calendar,
   Menu,
   LogOut,
   User,
   Bell,
   Search,
+  Plus,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -39,11 +37,10 @@ interface DashboardLayoutProps {
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
-  { name: "My Subscriptions", href: "/dashboard/subscriptions", icon: CreditCard },
+  { name: "Subscriptions", href: "/dashboard/subscriptions", icon: Package },
   { name: "Groups", href: "/dashboard/groups", icon: Users },
-  { name: "Activity", href: "/dashboard/activity", icon: Activity },
-  { name: "Payments", href: "/dashboard/payments", icon: Calendar },
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
+  { name: "Notifications", href: "#", icon: Bell },
+  { name: "Settings", href: "/profile", icon: Settings },
 ]
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
@@ -52,24 +49,20 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full">
-      {/* Logo */}
-      <div className="flex items-center gap-2 px-6 py-4 border-b">
-        <Shield className="h-8 w-8 text-indigo-600" />
-        <span className="text-xl font-bold">Sentinel 360</span>
+    <div className="flex flex-col h-full bg-[#1A1C2A] text-white">
+      <div className="flex items-center justify-center h-16 border-b border-gray-700">
+        <h1 className="text-2xl font-bold">Sentinel 360</h1>
       </div>
-
-      {/* Navigation */}
       <nav className="flex-1 px-4 py-6 space-y-2">
         {navigation.map((item) => {
-          const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
+          const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href))
           return (
             <Link
               key={item.name}
               href={item.href}
               className={cn(
                 "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                isActive ? "bg-indigo-100 text-indigo-700" : "text-gray-600 hover:text-gray-900 hover:bg-gray-100",
+                isActive ? "bg-[#4A4AFF]" : "text-gray-400 hover:bg-[#2A2D3A] hover:text-white"
               )}
               onClick={() => setSidebarOpen(false)}
             >
@@ -79,35 +72,25 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           )
         })}
       </nav>
-
-      {/* User Info */}
-      <div className="px-4 py-4 border-t">
-        <div className="flex items-center gap-3 px-3 py-2">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src="/placeholder.svg" />
-            <AvatarFallback className="bg-indigo-100 text-indigo-600">
-              {user?.name?.charAt(0).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate">{user?.name}</p>
-            <p className="text-xs text-gray-500 truncate">{user?.email}</p>
-          </div>
-        </div>
+      <div className="px-4 py-4 border-t border-gray-700">
+        <a href="#" className="flex items-center gap-3 p-2 text-gray-400 hover:bg-[#2A2D3A] rounded-lg">
+            <Plus size={20} />
+            <span>Invite friends</span>
+        </a>
       </div>
     </div>
   )
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-[#0D0F1E] text-white">
       {/* Desktop Sidebar */}
-      <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 bg-white border-r">
+      <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
         <SidebarContent />
       </div>
 
       {/* Mobile Sidebar */}
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-        <SheetContent side="left" className="p-0 w-64">
+        <SheetContent side="left" className="p-0 w-64 border-r-0">
           <SidebarContent />
         </SheetContent>
       </Sheet>
@@ -115,67 +98,54 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       {/* Main Content */}
       <div className="flex-1 lg:pl-64">
         {/* Top Header */}
-        <header className="bg-white border-b px-4 py-3 flex items-center justify-between sticky top-0 z-40">
+        <header className="bg-[#0D0F1E] border-b border-gray-800 px-6 py-4 flex items-center justify-between sticky top-0 z-40">
           <div className="flex items-center gap-4">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="sm" className="lg:hidden">
-                  <Menu className="h-5 w-5" />
+            <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="lg:hidden">
+                  <Menu className="h-6 w-6" />
                 </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="p-0 w-64">
-                <SidebarContent />
-              </SheetContent>
-            </Sheet>
-
-            <div className="hidden sm:flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-2 min-w-0 flex-1 max-w-md">
-              <Search className="h-4 w-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search subscriptions, groups..."
-                className="bg-transparent border-0 outline-0 text-sm flex-1 min-w-0"
-              />
-            </div>
+            </SheetTrigger>
+             <h1 className="text-2xl font-bold">Dashboard</h1>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm">
-              <Bell className="h-4 w-4" />
+          <div className="flex items-center gap-4">
+             <div className="relative hidden sm:block">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Input
+                  placeholder="Search groups..."
+                  className="bg-[#1A1C2A] border-none pl-10 w-64 text-white"
+                />
+             </div>
+            <Button variant="ghost" size="icon">
+              <Bell className="h-6 w-6" />
             </Button>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src="/placeholder.svg" />
-                    <AvatarFallback className="bg-indigo-100 text-indigo-600">
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage src={user?.image || undefined} alt={user?.name || ""} />
+                    <AvatarFallback className="bg-gray-600">
                       {user?.name?.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuContent className="w-56 bg-[#1A1C2A] text-white border-gray-700" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
                     <p className="text-sm font-medium leading-none">{user?.name}</p>
-                    <p className="text-xs leading-none text-muted-foreground">{user?.email}</p>
+                    <p className="text-xs leading-none text-gray-400">{user?.email}</p>
                   </div>
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator />
+                <DropdownMenuSeparator className="bg-gray-700"/>
                 <DropdownMenuItem asChild>
-                  <Link href="/dashboard/profile">
+                  <Link href="/profile" className="cursor-pointer">
                     <User className="mr-2 h-4 w-4" />
                     <span>Profile</span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/dashboard/settings">
-                    <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={logout}>
+                <DropdownMenuItem onClick={logout} className="cursor-pointer">
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Log out</span>
                 </DropdownMenuItem>

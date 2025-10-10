@@ -1,7 +1,41 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import SubscriptionCard from "@/components/redesign/SubscriptionCard"
-import { Bell, Search } from "lucide-react"
+import { Card } from "@/components/ui/card"
+import { Search } from "lucide-react"
+import { DashboardLayout } from "@/components/dashboard-layout"
+
+function IconPlaceholder() {
+  return (
+    <svg
+      className="w-10 h-10 text-gray-500"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7m-4 10V7m-6 10V7m-6 10V7M3 7l9-4 9 4M3 7h18"
+      />
+    </svg>
+  )
+}
+
+function SubscriptionCard({ name, members, totalSlots, price }: { name: string, members: number, totalSlots: number, price: number }) {
+  return (
+    <Card className="bg-[#1A1C2A] p-4 rounded-lg text-white">
+      <div className="w-full h-32 bg-[#2A2D3A] rounded-md mb-4 flex items-center justify-center">
+        <IconPlaceholder />
+      </div>
+      <h3 className="text-lg font-bold">{name}</h3>
+      <p className="text-sm text-gray-400">{`${members}/${totalSlots} members, $${price}/month`}</p>
+    </Card>
+  )
+}
 
 const subscriptions = [
   { name: "StreamVerse Premium", members: 4, totalSlots: 5, price: 5 },
@@ -16,33 +50,7 @@ const subscriptions = [
 
 export default function MarketplacePage() {
   return (
-    <div className="min-h-screen bg-[#0D0F1E] text-white">
-      <header className="flex justify-between items-center p-6 border-b border-gray-800">
-        <div className="flex items-center gap-8">
-          <div className="text-2xl font-bold">Sentinel 360</div>
-          <nav className="hidden md:flex gap-6">
-            <a href="/redesign" className="text-gray-400 hover:text-white">Home</a>
-            <a href="#" className="text-gray-400 hover:text-white">My Shares</a>
-            <a href="/redesign/marketplace" className="text-white">Marketplace</a>
-            <a href="#" className="text-gray-400 hover:text-white">Help</a>
-          </nav>
-        </div>
-        <div className="flex items-center gap-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-            <Input
-              placeholder="Search groups..."
-              className="bg-[#1A1C2A] border-none pl-10 w-64"
-            />
-          </div>
-          <Button variant="ghost" size="icon">
-            <Bell size={20} />
-          </Button>
-          <div className="w-10 h-10 rounded-full bg-gray-600"></div>
-        </div>
-      </header>
-
-      <main className="p-8">
+    <DashboardLayout>
         <h1 className="text-4xl font-bold mb-2">Marketplace</h1>
         <p className="text-lg text-gray-400 mb-8">
           Explore available subscription groups and find the perfect fit for your needs.
@@ -66,7 +74,6 @@ export default function MarketplacePage() {
             />
           ))}
         </div>
-      </main>
-    </div>
+    </DashboardLayout>
   )
 }

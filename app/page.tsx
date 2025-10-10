@@ -1,283 +1,109 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Shield, Users, CreditCard, ArrowRight } from "lucide-react"
+import { Card } from "@/components/ui/card"
 import Link from "next/link"
 
-export default function HomePage() {
+function IconPlaceholder() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md border-b sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <Shield className="h-8 w-8 text-indigo-600" />
-              <span className="text-xl font-bold text-gray-900">Sentinel 360</span>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="#features" className="text-gray-600 hover:text-indigo-600 transition-colors">
-                Features
-              </Link>
-              <Link href="#how-it-works" className="text-gray-600 hover:text-indigo-600 transition-colors">
-                How It Works
-              </Link>
-              <Link href="#pricing" className="text-gray-600 hover:text-indigo-600 transition-colors">
-                Pricing
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/login">
-                <Button variant="ghost">Login</Button>
-              </Link>
-              <Link href="/register">
-                <Button>Get Started</Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <svg
+      className="w-10 h-10 text-gray-500"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7m-4 10V7m-6 10V7m-6 10V7M3 7l9-4 9 4M3 7h18"
+      />
+    </svg>
+  )
+}
 
-      {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <Badge className="mb-4 bg-indigo-100 text-indigo-800 hover:bg-indigo-100">
-            Exclusive for Thapar University Students
-          </Badge>
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Share Subscriptions,
-            <span className="text-indigo-600"> Save Money</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Sentinel 360 helps Thapar students manage their subscriptions and share costs with trusted peers. Split
-            Netflix, Spotify, Adobe, and more while keeping everything secure and organized.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/register">
-              <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700">
-                Start Sharing Now
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href="#how-it-works">
-              <Button size="lg" variant="outline">
-                Learn How It Works
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Sentinel 360?</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Built specifically for Thapar students with security, simplicity, and savings in mind.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <Shield className="h-12 w-12 text-indigo-600 mb-4" />
-                <CardTitle>Secure & Trusted</CardTitle>
-                <CardDescription>
-                  Exclusive to @thapar.edu emails with secure payment processing and verified user accounts.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <Users className="h-12 w-12 text-indigo-600 mb-4" />
-                <CardTitle>Easy Group Management</CardTitle>
-                <CardDescription>
-                  Create sharing groups, manage members, and handle approvals with our intuitive interface.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <CreditCard className="h-12 w-12 text-indigo-600 mb-4" />
-                <CardTitle>Smart Payments</CardTitle>
-                <CardDescription>
-                  Automated payment splitting with Razorpay integration. Pay your share securely and instantly.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
-            <p className="text-xl text-gray-600">Get started in three simple steps</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-indigo-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                1
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Add Your Subscriptions</h3>
-              <p className="text-gray-600">
-                Register with your @thapar.edu email and add the subscriptions you want to share or join.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-indigo-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                2
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Create or Join Groups</h3>
-              <p className="text-gray-600">
-                Share your subscriptions with others or request to join existing sharing groups.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-indigo-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mx-auto mb-4">
-                3
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Pay & Save</h3>
-              <p className="text-gray-600">
-                Once approved, pay your share securely and start enjoying shared subscriptions immediately.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Popular Subscriptions */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Popular Subscriptions to Share</h2>
-            <p className="text-xl text-gray-600">Join thousands of students already saving on these services</p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {[
-              { name: "Netflix", price: "₹199/month", savings: "Save ₹150" },
-              { name: "Spotify", price: "₹119/month", savings: "Save ₹90" },
-              { name: "Adobe CC", price: "₹1,675/month", savings: "Save ₹1,200" },
-              { name: "YouTube Premium", price: "₹129/month", savings: "Save ₹100" },
-              { name: "Amazon Prime", price: "₹179/month", savings: "Save ₹130" },
-              { name: "Disney+ Hotstar", price: "₹299/month", savings: "Save ₹200" },
-            ].map((service, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">{service.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-600 mb-1">{service.price}</p>
-                  <Badge variant="secondary" className="text-xs">
-                    {service.savings}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-indigo-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Start Saving?</h2>
-          <p className="text-xl text-indigo-100 mb-8">
-            Join hundreds of Thapar students who are already sharing and saving on their favorite subscriptions.
-          </p>
+export default function LandingPage() {
+  return (
+    <div className="flex flex-col min-h-screen bg-[#0D0F1E] text-white">
+      <header className="flex justify-between items-center p-6">
+        <div className="text-2xl font-bold">Sentinel 360</div>
+        <nav className="hidden md:flex gap-8 items-center">
+          <a href="#" className="hover:text-gray-300">How it works</a>
+          <a href="#" className="hover:text-gray-300">Pricing</a>
+          <a href="#" className="hover:text-gray-300">Blog</a>
+        </nav>
+        <div className="flex gap-4">
+          <Link href="/login">
+            <Button variant="ghost">Log in</Button>
+          </Link>
           <Link href="/register">
-            <Button size="lg" className="bg-white text-indigo-600 hover:bg-gray-100">
-              Create Your Account
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Button className="bg-[#4A4AFF] hover:bg-[#4A4AFF]/90">Sign up</Button>
           </Link>
         </div>
-      </section>
+      </header>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Shield className="h-6 w-6" />
-                <span className="text-lg font-bold">Sentinel 360</span>
+      <main className="flex-grow">
+        <section className="text-center py-20">
+          <h1 className="text-5xl font-bold mb-4">Share Subscriptions, Save <br /> Effortlessly</h1>
+          <p className="text-lg text-gray-400 mb-8">
+            Sentinel 360 is the most secure and simple way to share subscription <br />
+            costs with friends and family. Enjoy your favorite services for up to 70% less.
+          </p>
+          <div className="flex justify-center gap-4">
+            <Link href="/register">
+              <Button className="bg-[#4A4AFF] hover:bg-[#4A4AFF]/90">Get started for free</Button>
+            </Link>
+            <Button variant="outline" className="text-white border-white">Learn more</Button>
+          </div>
+        </section>
+
+        <section className="py-20 text-center">
+          <h2 className="text-4xl font-bold mb-4">How Sentinel 360 Works</h2>
+          <p className="text-lg text-gray-400 mb-12">
+            Sharing subscriptions is as easy as 1-2-3. Create a group, invite members, and start saving.
+          </p>
+          <div className="grid md:grid-cols-3 gap-8 px-8">
+            <Card className="bg-[#1A1C2A] p-8 rounded-lg">
+              <div className="w-full h-32 bg-[#2A2D3A] rounded-md mb-4 flex items-center justify-center">
+                <IconPlaceholder />
               </div>
-              <p className="text-gray-400">The trusted subscription sharing platform for Thapar University students.</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Platform</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="#features" className="hover:text-white transition-colors">
-                    Features
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#how-it-works" className="hover:text-white transition-colors">
-                    How It Works
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/register" className="hover:text-white transition-colors">
-                    Get Started
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Support</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/help" className="hover:text-white transition-colors">
-                    Help Center
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="hover:text-white transition-colors">
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/faq" className="hover:text-white transition-colors">
-                    FAQ
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li>
-                  <Link href="/privacy" className="hover:text-white transition-colors">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-white transition-colors">
-                    Terms of Service
-                  </Link>
-                </li>
-              </ul>
-            </div>
+              <h3 className="text-xl font-bold mb-2">Create a Group</h3>
+              <p className="text-gray-400">Choose the subscription you want to share. Set the number of members and the price per slot.</p>
+            </Card>
+            <Card className="bg-[#1A1C2A] p-8 rounded-lg">
+              <div className="w-full h-32 bg-[#2A2D3A] rounded-md mb-4 flex items-center justify-center">
+                <IconPlaceholder />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Invite Friends</h3>
+              <p className="text-gray-400">Send a unique link to your friends and family. They can join your group with just a few clicks.</p>
+            </Card>
+            <Card className="bg-[#1A1C2A] p-8 rounded-lg">
+              <div className="w-full h-32 bg-[#2A2D3A] rounded-md mb-4 flex items-center justify-center">
+                <IconPlaceholder />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Start Saving</h3>
+              <p className="text-gray-400">Once your group is full, everyone starts saving. Payments are handled automatically and securely.</p>
+            </Card>
           </div>
+        </section>
 
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Sentinel 360. Built for Thapar University students.</p>
-          </div>
+        <section className="text-center py-20">
+          <h2 className="text-4xl font-bold mb-4">Ready to Start Saving?</h2>
+          <p className="text-lg text-gray-400 mb-8">
+            Sign up for Sentinel 360 today and join thousands of users who are cutting their subscription costs.
+          </p>
+          <Link href="/register">
+            <Button className="bg-[#4A4AFF] hover:bg-[#4A4AFF]/90">Sign Up Now</Button>
+          </Link>
+        </section>
+      </main>
+
+      <footer className="text-center py-6 border-t border-gray-800">
+        <div className="flex justify-center gap-8 mb-4">
+          <a href="#" className="text-gray-400 hover:text-white">Terms of Service</a>
+          <a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a>
+          <a href="#" className="text-gray-400 hover:text-white">Contact Us</a>
         </div>
+        <p className="text-gray-500">© 2024 Sentinel 360. All rights reserved.</p>
       </footer>
     </div>
   )
